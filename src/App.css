@@ -1,38 +1,82 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: rgb(74, 163, 191);
   min-height: 100vh;
   display: flex;
+}
+
+.board-wrapper {
+  padding: .5rem;
+  display: flex;
+  gap: .5rem;
+  width: 100%;
+  /* height: 100%; */
+  /* grid-template-columns: repeat(auto-fill, 300px); */
+  /* align-items: start; */
+  flex-wrap: wrap;
+}
+
+.dnd-column {
+  background-color: rgb(232, 233, 237);
+  border-radius: 5px;
+  padding: .5rem;
+  flex: 1 1 0px;
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  text-align: left;
 }
 
-.App-link {
-  color: #61dafb;
+.dnd-item {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  padding: .5rem;
+  background-color: white;
+  border-radius: 5px;
+  color: rgb(78, 92, 110);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  cursor: grab;
+}
+.dnd-item:not(:last-of-type) {
+  margin-bottom: .5rem;
+}
+.dnd-item * {  
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.column-title {
+  text-align: left;
+  margin-bottom: 1.25rem;
+  color: rgb(78, 92, 110);
+  font-weight: bold;
+}
+
+.current {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: grabbing;
+}
+
+.button__add-card-wrapper {
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.button__add-card-wrapper:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.button__add-card {
+  border: none;
+  background: none;
+  cursor: inherit;
+}
+
+/* ipad mini reference */
+@media only screen and (max-width: 768px) {
+  .board-wrapper {
+    flex-wrap: wrap;
   }
-  to {
-    transform: rotate(360deg);
+  .dnd-column {
+    flex: 100%;
   }
 }
