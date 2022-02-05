@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 
 const initData = [
-  { title: 'To Do', items: ['one'], isAddBoxShown: false, newItem: '' },
-  { title: 'In Progress', items: ['four'], isAddBoxShown: false, newItem: '' },
-  { title: 'QA', items: ['six', 'seven'], isAddBoxShown: false, newItem: '' },
-  { title: 'Done', items: [], isAddBoxShown: false, newItem: '' }
+  { title: 'To Do', items: ['Pay rent'], isAddBoxShown: false, newItem: '' },
+  { title: 'In Progress', items: ['Organize closet', 'Juice cleanse'], isAddBoxShown: false, newItem: '' },
+  { title: 'QA', items: ['Write new year resolution'], isAddBoxShown: false, newItem: '' },
+  { title: 'Done', items: ['Call mom'], isAddBoxShown: false, newItem: '' }
 ]
 const TrelloBoard = () => {
   const [list, setList] = useState(initData);
@@ -63,6 +63,7 @@ const TrelloBoard = () => {
       let newList = JSON.parse(JSON.stringify(prevList));
       newList.map(x => x.isAddBoxShown = false);
       newList[columnIndex].isAddBoxShown = boolean ? true : false;
+      newList[columnIndex].newItem = boolean ? null : '';
       return newList;
     })
   }
