@@ -1,17 +1,16 @@
 import React, { useState, useRef } from 'react';
 
 const initData = [
-  { title: 'To Do', items: ['one'] },
-  { title: 'In Progress', items: ['four'] },
-  { title: 'QA', items: ['six', 'seven'] },
-  { title: 'Done', items: [] }
+  { title: 'To Do', items: ['one'], isAddBoxShown: false, newItem: '' },
+  { title: 'In Progress', items: ['four'], isAddBoxShown: false, newItem: '' },
+  { title: 'QA', items: ['six', 'seven'], isAddBoxShown: false, newItem: '' },
+  { title: 'Done', items: [], isAddBoxShown: false, newItem: '' }
 ]
 const TrelloBoard = () => {
   const [list, setList] = useState(initData);
   const [isDragging, setDragging] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
-  const [newCard, setNewCard] = useState();
 
   // ------------------- action: drag and drop card -------------------
   const handleDragStart = (e, params) => {
@@ -59,14 +58,31 @@ const TrelloBoard = () => {
   }
 
   // ------------------- action: add card -------------------
-  const handleAddCard = (e, columnIndex) => {
-    console.log('handleAddCard: ', columnIndex)
-  }
-  const confirmAddCard = (e, columnIndex) => {
-    console.log('confirmAddCard: ', columnIndex)
+  const handleAddCardDisplay = (e, columnIndex, boolean) => {
     setList(prevList => {
       let newList = JSON.parse(JSON.stringify(prevList));
-      newList[columnIndex].items.push(newCard)
+      newList.map(x => x.isAddBoxShown = false);
+      newList[columnIndex].isAddBoxShown = boolean ? true : false;
+      return newList;
+    })
+  }
+  const handleSubmitNewCard = (e, columnIndex) => {
+    e.preventDefault();
+    if (list[columnIndex].newItem === '') {
+      alert(`Please enter a title before adding a card for ${list[columnIndex].title}.`);
+      return;
+    }
+    setList(prevList => {
+      let newList = JSON.parse(JSON.stringify(prevList));
+      newList[columnIndex].items.push(newList[columnIndex].newItem)
+      newList[columnIndex].newItem = ''
+      return newList
+    })
+  }
+  const handleTextareaChange = (e, columnIndex) => {
+    setList(prevList => {
+      let newList = JSON.parse(JSON.stringify(prevList));
+      newList[columnIndex].newItem = e.target.value;
       return newList
     })
   }
@@ -94,22 +110,29 @@ const TrelloBoard = () => {
                 {item}
               </div>
             ))}
-            <div className={'add-card__wrapper'}>
-              <input
-                onChange={(e) => setNewCard(e.target.value)}
-                placeholder='Enter a title for this card...”'
-                className={'add-card__input'} />
+            <form
+              onSubmit={(e) => { handleSubmitNewCard(e, columnIndex) }}
+              style={{ display: column.isAddBoxShown ? 'flex' : 'none' }}
+              className={'add-card__wrapper'}
+            >
+              <textarea
+                onChange={(e) => handleTextareaChange(e, columnIndex)}
+                type={'text'}
+                ref={textarea => textarea && textarea.focus()}
+                value={column.newItem}
+                placeholder='Enter a title for this card...'
+                className={'add-card__textarea'} />
               <div className={'add-card__actions'}>
-                <button onClick={(e) => { confirmAddCard(e, columnIndex) }} className={'add-card__confirm'}>
+                <button type={'submit'} className={'add-card__submit'}>
                   Add Card
                 </button>
-                <button className={'add-card__cancel'}>
-                  X
+                <button type={'button'} onClick={(e) => { handleAddCardDisplay(e, columnIndex, false) }} className={'add-card__cancel'}>
+                  ✕
                 </button>
               </div>
-            </div>
+            </form>
           </section>
-          <section onClick={(e) => { handleAddCard(e, columnIndex) }} className={'button__add-card-wrapper'}>
+          <section onClick={(e) => { handleAddCardDisplay(e, columnIndex, true) }} className={'button__add-card-wrapper'}>
             <button
               key={columnIndex}
               className={'button__add-card'}>

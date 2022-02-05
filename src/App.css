@@ -6,40 +6,34 @@
 }
 
 .board-wrapper {
-  padding: .5rem;
+  padding: 0.5rem;
   display: flex;
   gap: .5rem;
   width: 100%;
-  /* height: 100%; */
-  /* grid-template-columns: repeat(auto-fill, 300px); */
-  /* align-items: start; */
-  flex-wrap: wrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .dnd-column {
   background-color: rgb(232, 233, 237);
   border-radius: 5px;
   padding: .5rem;
-  flex: 1 1 0px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
+  min-width: 250px;
 }
 
 .dnd-item {
-  display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
-  padding: .5rem;
-  background-color: white;
+  padding: 0.5rem;
+  background-color: #fff;
   border-radius: 5px;
   color: rgb(78, 92, 110);
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   cursor: grab;
-}
-.dnd-item:not(:last-of-type) {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 .dnd-item * {  
   margin: 0;
@@ -57,6 +51,46 @@
   cursor: grabbing;
 }
 
+.add-card__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.add-card__wrapper textarea {
+  outline: none;
+  resize: vertical;
+  margin-bottom: 0.5rem;
+  color: rgb(78, 92, 110);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.add-card__actions * {
+  cursor: pointer;
+}
+.add-card__actions {
+  display: flex;
+}
+.add-card__submit {
+  background-color: rgb(104, 175, 84);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  margin-right: 5px;
+  font-weight: bold;
+}
+.add-card__cancel {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+}
+
 .button__add-card-wrapper {
   border-radius: 5px;
   padding: 0.5rem;
@@ -69,14 +103,4 @@
   border: none;
   background: none;
   cursor: inherit;
-}
-
-/* ipad mini reference */
-@media only screen and (max-width: 768px) {
-  .board-wrapper {
-    flex-wrap: wrap;
-  }
-  .dnd-column {
-    flex: 100%;
-  }
 }
