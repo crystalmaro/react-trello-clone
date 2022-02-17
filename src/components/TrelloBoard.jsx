@@ -63,7 +63,7 @@ const TrelloBoard = () => {
       let newList = JSON.parse(JSON.stringify(prevList));
       newList.map(x => x.isAddBoxShown = false);
       newList[columnIndex].isAddBoxShown = boolean ? true : false;
-      newList[columnIndex].newItem = boolean ? null : '';
+      newList[columnIndex].newItem = boolean ? undefined : '';
       return newList;
     })
   }
