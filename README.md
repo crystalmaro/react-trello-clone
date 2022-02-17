@@ -14,6 +14,16 @@ A replica of a Trello task board, featuring draggable tasks within columns.
 3. Build it without external drag & drop JavaScript library (i.e. react-beautiful-dnd, react-dnd etc.)
 
 ## Image
+Desktop View
+![image](https://user-images.githubusercontent.com/30251553/154514358-b4b04085-28fb-4bfd-be8e-3d809383b18f.png)
+
+Mobile View (Horizontal Scrolling)
+![image](https://user-images.githubusercontent.com/30251553/154514691-3384930d-99a9-4428-820d-8a2e4ef70509.png)
+
+Adding a new task
+
+![image](https://user-images.githubusercontent.com/30251553/154514567-bd6789ae-101f-4d4e-8354-88ba5d120d06.png)
+
 ## Available Scripts
 In the project directory, you can run:
 
